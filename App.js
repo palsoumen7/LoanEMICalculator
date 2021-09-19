@@ -5,13 +5,22 @@ import { SafeAreaView, Dimensions, Button, ScrollView, StatusBar, StyleSheet, Te
 const { width, height } = Dimensions.get('window')
 
 export default function App() {
-  const [loanAmount, setLoanAmount] = useState("");
-  const [interestRate, setInterestRate] = useState("");
-  const [numMonths, setNumMonth] = useState("");
-  // const [loanEmi, setLoanEmi] = useState(null);
-  // const [totalInterest, setTotalIntrest] = useState(null);
-  // const [totalPayment, setTotalPayment] = useState(null);
-  // const [isEnabled, setIsEnabled] = useState(false);
+  const [loanAmount, setLoanAmount] = useState();
+  const [interestRate, setInterestRate] = useState();
+  const [numMonths, setNumMonth] = useState();
+  const [loanEmi, setLoanEmi] = useState();
+  const [totalInterest, setTotalIntrest] = useState();
+  const [totalPayment, setTotalPayment] = useState(null);
+  const [text, setText] = useState(false);
+  const [symbol, setSymbol] = useState(false);
+  const [loan, setLoan] = useState(false);
+  const [intrest, setIntrest] = useState(false);
+  const [backgroundcolor1, setBackgroundcolor1] = useState();
+  const [backgroundcolor2, setBackgroundcolor2] = useState();
+  const [backgroundcolor3, setBackgroundcolor3] = useState();
+  const [principle, setPrinciple] = useState();
+  const [color, setColor] = useState();
+  const [bordertopWidth, setBorderTopWidth] = useState();
 
   const calculate = () => {
     let interest = interestRate / 1200;
@@ -21,10 +30,31 @@ export default function App() {
     let ratio = top / bottom;
     const LoanEMI = loanAmount * interest * ratio;
     const EMI = (LoanEMI.toString().split(".")[0]);
+    setLoanEmi(EMI);
     const TotalPyment = EMI * numMonths;
+    setTotalIntrest(TotalPyment);
     const TotalInterest = TotalPyment - loanAmount;
-
-    console.log("Loan EMI", EMI, "Total Interest Payable", TotalInterest, "Total Payment", TotalPyment)
+    setTotalPayment(TotalInterest);
+    const TEXT = 'Loan EMI Calculator';
+    setText(TEXT);
+    const LOANEMI = 'Loan EMI';
+    setLoan(LOANEMI);
+    const Symbol = '₹'
+    setSymbol(Symbol);
+    const INTREST = 'Total Interest Payable';
+    setIntrest(INTREST);
+    const Principle = 'Total Payment(Principle+Intrest';
+    setPrinciple(Principle);
+    const backgroundColors1 = '#e0dc60';
+    setBackgroundcolor1(backgroundColors1);
+    const backgroundColors2 = '#aadbe6';
+    setBackgroundcolor2(backgroundColors2);
+    const backgroundColors3 = '#bbc3c4';
+    setBackgroundcolor3(backgroundColors3);
+    const colors = 'gray';
+    setColor(colors);
+    const borderTopWidth = 1;
+    setBorderTopWidth(borderTopWidth);
   };
 
 
@@ -79,12 +109,50 @@ export default function App() {
         </View>
 
 
-        {/* <View>
-          <View>
-            {loanEmi}
+        <View>
+          <View style={{ borderColor: color, borderTopWidth: bordertopWidth }}>
+            <Text style={styles.mainTextView}>
+              {text}
+            </Text>
+          </View>
+          <View style={{ flexDirection: "row", justifyContent: "space-between", margin: 15 }}>
+            <View style={{ backgroundColor: backgroundcolor1, paddingVertical: 15, paddingHorizontal: 50, borderRadius: 20, alignItems: "center" }}>
+              <View>
+                <Text style={{ fontWeight: "bold" }}>{loan}</Text>
+              </View>
+              <View style={{ flexDirection: "row" }}>
+                <Text style={{ fontWeight: "bold" }}>{symbol}</Text>
+                <Text style={{ fontWeight: "bold", marginHorizontal: 2 }}>{loanEmi}</Text>
+              </View>
+            </View>
+
+            <View style={{ backgroundColor: backgroundcolor2, padding: 15, borderRadius: 20, alignItems: "center" }}>
+              <View>
+                <Text style={{ fontWeight: "bold" }}>{intrest}</Text>
+              </View>
+              <View style={{ flexDirection: 'row' }}>
+                <Text style={{ fontWeight: "bold" }}>{symbol}</Text>
+                <Text style={{ fontWeight: "bold", marginHorizontal: 2 }}>{totalPayment}</Text>
+              </View>
+            </View>
 
           </View>
-        </View> */}
+          <View style={{ backgroundColor: backgroundcolor3, borderRadius: 20, margin: 15, alignContent: 'center', alignItems: "center", padding: 15 }}>
+            <View>
+              <Text style={{ fontWeight: "bold" }}>
+                {principle}
+              </Text>
+            </View>
+            <View style={{ flexDirection: "row" }}>
+              <Text style={{ fontWeight: "bold" }}>
+                {symbol}
+              </Text>
+              <Text style={{ fontWeight: "bold", marginHorizontal: 2 }}>
+                {totalInterest}
+              </Text>
+            </View>
+          </View>
+        </View>
 
       </ScrollView>
     </SafeAreaView>
