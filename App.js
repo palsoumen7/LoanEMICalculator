@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, Dimensions, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View, TextInput } from 'react-native';
+import { SafeAreaView, Dimensions, Button, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View, TextInput } from 'react-native';
 
 
 const { width, height } = Dimensions.get('window')
@@ -8,9 +8,10 @@ export default function App() {
   const [loanAmount, setLoanAmount] = useState("");
   const [interestRate, setInterestRate] = useState("");
   const [numMonths, setNumMonth] = useState("");
-  const [loanEmi, setLoanEmi] = useState(null);
-  const [totalInterest, setTotalIntrest] = useState(null);
-  const [totalPayment, setTotalPayment] = useState(null);
+  // const [loanEmi, setLoanEmi] = useState(null);
+  // const [totalInterest, setTotalIntrest] = useState(null);
+  // const [totalPayment, setTotalPayment] = useState(null);
+  // const [isEnabled, setIsEnabled] = useState(false);
 
   const calculate = () => {
     let interest = interestRate / 1200;
@@ -23,7 +24,7 @@ export default function App() {
     const TotalPyment = EMI * numMonths;
     const TotalInterest = TotalPyment - loanAmount;
 
-    console.log(EMI)
+    console.log("Loan EMI", EMI, "Total Interest Payable", TotalInterest, "Total Payment", TotalPyment)
   };
 
 
